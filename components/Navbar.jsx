@@ -15,20 +15,17 @@ import {
   RiCodeLine,
   RiQuestionFill,
 } from "react-icons/ri";
-import React, { useEffect, useCallback, useRef  } from "react";
-import "./scss/NavbarStyles.css";
+import React, { useEffect, useCallback, useRef, useState } from "react";
+import "../styles/NavbarStyles.css";
+
+//TODO: Make this code less scuffed (mainly the startDropdown thing)
+
 
 const Navbar = () => {
+  const [startDropdown, setIsStartDropdown] = useState(false);
   const toggle = useRef();
   const nav = useRef();
-  const showMenu = useCallback(() => {
-    nav.current.classList.toggle("show-menu");
-    toggle.current.classList.toggle("show-icon");
-  }, []);
-
-  useEffect(() => {
-
-    /*=============== SHOW DROPDOWN MENU ===============*/
+  const startDropdowns = useCallback(() => {
     const dropdownItems = document.querySelectorAll(".dropdown__item");
 
     // 1. Select each dropdown item
@@ -49,23 +46,35 @@ const Navbar = () => {
         }
       });
     });
+  });
 
-    // 3. Create a function to display the dropdown
-    const toggleItem = (item) => {
-      // 3.1. Select each dropdown content
-      const dropdownContainer = item.querySelector(".dropdown__container");
+  const showMenu = useCallback(() => {
+    nav.current.classList.toggle("show-menu");
+    toggle.current.classList.toggle("show-icon");
 
-      // 6. If the same item contains the show-dropdown class, remove
-      if (item.classList.contains("show-dropdown")) {
-        dropdownContainer.removeAttribute("style");
-        item.classList.remove("show-dropdown");
-      } else {
-        // 4. Add the maximum height to the dropdown content and add the show-dropdown class
-        dropdownContainer.style.height = dropdownContainer.scrollHeight + "px";
-        item.classList.add("show-dropdown");
-      }
-    };
+    if (!startDropdown) {
+      startDropdowns();
+      setIsStartDropdown(true);
+    }
+  }, []);
 
+  // 3. Create a function to display the dropdown
+  const toggleItem = useCallback((item) => {
+    // 3.1. Select each dropdown content
+    const dropdownContainer = item.querySelector(".dropdown__container");
+
+    // 6. If the same item contains the show-dropdown class, remove
+    if (item.classList.contains("show-dropdown")) {
+      dropdownContainer.removeAttribute("style");
+      item.classList.remove("show-dropdown");
+    } else {
+      // 4. Add the maximum height to the dropdown content and add the show-dropdown class
+      dropdownContainer.style.height = dropdownContainer.scrollHeight + "px";
+      item.classList.add("show-dropdown");
+    }
+  });
+
+  useEffect(() => {
     /*=============== DELETE DROPDOWN STYLES ===============*/
     const mediaQuery = matchMedia("(min-width: 1118px)"),
       dropdownContainer = document.querySelectorAll(".dropdown__container");
@@ -100,7 +109,12 @@ const Navbar = () => {
             Highlanders
           </a>
 
-          <div className="nav__toggle" id="nav-toggle" onClick={showMenu} ref={toggle}>
+          <div
+            className="nav__toggle"
+            id="nav-toggle"
+            onClick={showMenu}
+            ref={toggle}
+          >
             <i className="nav__toggle-menu">
               <RiMenuLine />
             </i>
@@ -122,10 +136,7 @@ const Navbar = () => {
             {/*=============== DROPDOWN 1 ===============*/}
             <li className="dropdown__item">
               <div className="nav__link dropdown__button">
-                Discover{" "}
-                <i className="dropdown__arrow">
-                  <RiArrowDownSLine />
-                </i>
+                Discover <RiArrowDownSLine className="dropdown__arrow" />
               </div>
 
               <div className="dropdown__container">
@@ -248,10 +259,8 @@ const Navbar = () => {
             {/*=============== DROPDOWN 2 ===============*/}
             <li className="dropdown__item">
               <div className="nav__link dropdown__button">
-                Resources{" "}
-                <i className="dropdown__arrow">
-                  <RiArrowDownSLine />
-                </i>
+                Resources Discover{" "}
+                <RiArrowDownSLine className="dropdown__arrow" />
               </div>
 
               <div className="dropdown__container">
@@ -347,10 +356,7 @@ const Navbar = () => {
             {/*=============== DROPDOWN 3 ===============*/}
             <li className="dropdown__item">
               <div className="nav__link dropdown__button">
-                Team{" "}
-                <i className="dropdown__arrow">
-                  <RiArrowDownSLine />
-                </i>
+                Team Discover <RiArrowDownSLine className="dropdown__arrow" />
               </div>
 
               <div className="dropdown__container">
