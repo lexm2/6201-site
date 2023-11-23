@@ -126,6 +126,7 @@
 
 .section__title {
   font-size: var(--big-font-size);
+  color: var(--text-color);
 }
 /*=============== ABOUT ===============*/
 .about__container {
@@ -198,13 +199,10 @@
   position: relative;
 }
 /*=============== Reveal ===============*/
-.reveal {
-  background: var(--backgroundColor);
-}
 
 .reveal-text {
   font-weight: 800;
-  filter: drop-shadow(0 0 0.06rem rgb(2, 2, 2));
+  color: var(--black-color-alt);
 }
 
 /*=============== BREAKPOINTS ===============*/
