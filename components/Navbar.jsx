@@ -23,17 +23,18 @@ import "../styles/NavbarStyles.css";
 
 const Navbar = () => {
   const [startDropdown, setIsStartDropdown] = useState(false);
+  const [dropdownItems, setDropdownItems] = useState([]);
   const toggle = useRef();
   const nav = useRef();
-  const startDropdowns = useCallback(() => {
-    const dropdownItems = document.querySelectorAll(".dropdown__item");
 
+  const startDropdowns = useCallback(() => {
+    setDropdownItems(Array.from(document.querySelectorAll(".dropdown__item")));
     // 1. Select each dropdown item
     dropdownItems.forEach((item) => {
       const dropdownButton = item.querySelector(".dropdown__button");
 
       // 2. Select each button click
-      dropdownButton.addEventListener("click", () => {
+      dropdownButton.current.addEventListener("click", () => {
         // 7. Select the current show-dropdown class
         const showDropdown = document.querySelector(".show-dropdown");
 
@@ -88,6 +89,10 @@ const Navbar = () => {
           e.removeAttribute("style");
         });
 
+        if (!startDropdown) {
+          startDropdowns();
+          setIsStartDropdown(true);
+        }
         // Remove the show-dropdown class from dropdown item
         dropdownItems.forEach((e) => {
           e.classList.remove("show-dropdown");

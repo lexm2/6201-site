@@ -30,6 +30,7 @@
   /*========== Font and typography ==========*/
 
   --biggest-font-size: 10rem;
+  --big-font-size: 5rem;
   --h1-font-size: 1.5rem;
   --h2-font-size: 1.25rem;
   --h3-font-size: 1rem;
@@ -40,6 +41,7 @@
   /* Responsive typography */
   @media screen and (min-width: 1150px) {
     --biggest-font-size: 25rem;
+    --big-font-size: 10rem;
     --h1-font-size: 2.25rem;
     --h2-font-size: 1.5rem;
     --h3-font-size: 1.25rem;
