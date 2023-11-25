@@ -11,7 +11,7 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@react-three/drei": "^9.88.10",
-    "@react-three/fiber": "^8.15.9",
+    "@react-three/fiber": "^8.15.11",
     "@types/three": "^0.158.1",
     "gsap": "^3.12.2",
     "next": "14.0.1",

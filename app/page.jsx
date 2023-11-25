@@ -7,14 +7,12 @@ import {
   RiInformationLine,
 } from "react-icons/ri";
 import Navbar from "@/components/Navbar";
+import ModelCanvas from "@/components/ModelCanvas";
 import "../styles/page.scss";
 import React, { useEffect, lazy } from "react";
 import gsap from "gsap";
 import Swiper from "@/components/Swiper";
 import TextReveal from "@/components/TextReveal";
-import Suspense from "react";
-import Canvas from "@react-three/fiber";
-import Environment from "@react-three/drei";
 
 export default function Home() {
   useEffect(() => {
@@ -38,6 +36,7 @@ export default function Home() {
   return (
     <main className="main">
       <Navbar />
+      <ModelCanvas />
       <section className="home section" id="home">
         <div className="home__container container grid">
           <div className="home__content">

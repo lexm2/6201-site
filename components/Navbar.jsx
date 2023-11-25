@@ -20,21 +20,20 @@ import "../styles/NavbarStyles.css";
 
 //TODO: Make this code less scuffed (mainly the startDropdown thing)
 
-
 const Navbar = () => {
   const [startDropdown, setIsStartDropdown] = useState(false);
-  const [dropdownItems, setDropdownItems] = useState([]);
+  var dropdownItems;
   const toggle = useRef();
   const nav = useRef();
 
   const startDropdowns = useCallback(() => {
-    setDropdownItems(Array.from(document.querySelectorAll(".dropdown__item")));
+    dropdownItems = document.querySelectorAll(".dropdown__item");
     // 1. Select each dropdown item
     dropdownItems.forEach((item) => {
       const dropdownButton = item.querySelector(".dropdown__button");
 
       // 2. Select each button click
-      dropdownButton.current.addEventListener("click", () => {
+      dropdownButton.addEventListener("click", () => {
         // 7. Select the current show-dropdown class
         const showDropdown = document.querySelector(".show-dropdown");
 

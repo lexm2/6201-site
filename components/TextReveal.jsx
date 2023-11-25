@@ -19,7 +19,7 @@ function TextReveal( {text, classes} ) {
       scrollTrigger: {
         trigger: triggerRef.current,
         scrub: true,
-        start: "top center",
+        start: "top bottom",
         end: "bottom center",
         //markers: true,
       },
