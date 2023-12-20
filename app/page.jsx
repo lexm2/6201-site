@@ -7,15 +7,16 @@ import {
   RiInformationLine,
 } from "react-icons/ri";
 import Navbar from "@/components/Navbar";
-import ModelCanvas from "@/components/ModelCanvas";
 import "../styles/page.scss";
 import React, { useEffect, lazy } from "react";
 import gsap from "gsap";
+import MyThree from "../public/ThreeModel";
 import Swiper from "@/components/Swiper";
 import TextReveal from "@/components/TextReveal";
 
 export default function Home() {
   useEffect(() => {
+    
     var tl = gsap.timeline({
       // paused: true, for loading screen
       defaults: {
@@ -36,8 +37,8 @@ export default function Home() {
   return (
     <main className="main">
       <Navbar />
-      <ModelCanvas />
-      <section className="home section" id="home">
+      <MyThree />
+      {/* <section className="home section" id="home">
         <div className="home__container container grid">
           <div className="home__content">
             <h1 className="home__title">
@@ -85,7 +86,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <section className="section" id="swipe">
         <Swiper />
       </section>
@@ -110,7 +110,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="favorite section" id="favorite"></section>
 
