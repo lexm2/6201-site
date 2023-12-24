@@ -8,15 +8,22 @@ import {
 } from "react-icons/ri";
 import Navbar from "@/components/Navbar";
 import "../styles/page.scss";
-import React, { useEffect, lazy } from "react";
+import React, { useEffect, lazy, useState, Suspense, useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Environment, Preload, useProgress, Loader } from "@react-three/drei";
 import gsap from "gsap";
-import MyThree from "../public/ThreeModel";
+import { useGSAP } from "@gsap/react";
 import Swiper from "@/components/Swiper";
 import TextReveal from "@/components/TextReveal";
+import { Bonk } from "@/public/Bonk";
 
 export default function Home() {
-  useEffect(() => {
-    
+  const { active, progress, errors, item, loaded, total } = useProgress();
+  const [df, setDf] = useState(false);
+  const container = useRef();
+  const { contextSafe } = useGSAP({ scope: container });
+
+  const afterLoad = contextSafe(() => {
     var tl = gsap.timeline({
       // paused: true, for loading screen
       defaults: {
@@ -27,18 +34,39 @@ export default function Home() {
       lazy,
     });
 
-    tl.to(".home__title span:nth-child(1)", { x: "0px" })
-      .to(".home__title span:nth-child(2)", { x: "0px" }, "<")
-      .to(".home__title span:nth-child(3)", { x: "0px" }, "<")
-      .to(".home__title span:nth-child(4)", { x: "0px" }, "<")
-      .to(".home__social", { opacity: 1, y: "3rem" }, "<");
+    // tl.to(".home__title span:nth-child(1)", { x: "0px" })
+    //   .to(".home__title span:nth-child(2)", { x: "0px" }, "<")
+    //   .to(".home__title span:nth-child(3)", { x: "0px" }, "<")
+    //   .to(".home__title span:nth-child(4)", { x: "0px" }, "<")
+    //   .to(".home__social", { opacity: 1, y: "3rem" }, "<");
+  });
+
+  useEffect(() => {
+    afterLoad();
+    if (active === true) {
+      setTimeout(() => {
+        setDf(true);
+      }, 3000);
+    }
   });
 
   return (
-    <main className="main">
-      <Navbar />
-      <MyThree />
-      {/* <section className="home section" id="home">
+    <main className="main" ref={container}>
+      <Suspense fallback={<Loader />}>
+        <div
+          style={{ width: "100%", position: "fixed", bottom: "0" }}
+          className="canvas__container"
+        >
+          <Canvas>
+            <Bonk />
+            {/* <ambientLight />
+            <Environment preset="city" /> */}
+            <Preload all />
+          </Canvas>
+        </div>
+
+        <Navbar />
+        {/* <section className="home section" id="home">
         <div className="home__container container grid">
           <div className="home__content">
             <h1 className="home__title">
@@ -112,13 +140,13 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="favorite section" id="favorite"></section>
+        {/* <section className="favorite section" id="favorite"></section>
 
       <section className="section"></section>
 
       <section className="sponsor section">
         <div className="sponsor__container container grid">
-          {/* <img
+          <img
             src="images/sponsor-1.png"
             alt="image"
             className="sponsor__img"
@@ -137,9 +165,10 @@ export default function Home() {
             src="images/sponsor-4.png"
             alt="image"
             className="sponsor__img"
-          /> */}
+          />
         </div>
-      </section>
+      </section> */}
+      </Suspense>
     </main>
   );
 }

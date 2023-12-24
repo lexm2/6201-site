@@ -204,6 +204,10 @@
   font-weight: 800;
   color: var(--black-color-alt);
 }
+/*=============== Canvas ===============*/
+.canvas__container {
+  height: calc(100% - var(--header-height));
+}
 
 /*=============== BREAKPOINTS ===============*/
 @media screen and (min-width: 340px) {
@@ -233,6 +237,12 @@
 
   .sponsor__container {
     grid-template-columns: repeat(4, max-content);
+  }
+}
+
+@media screen and (min-width: 1118px) {
+  .canvas__container {
+    height: calc(100% - var(--header-height) - 2rem);
   }
 }
 

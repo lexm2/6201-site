@@ -76,7 +76,7 @@ const Navbar = () => {
 
   useEffect(() => {
     /*=============== DELETE DROPDOWN STYLES ===============*/
-    const mediaQuery = matchMedia("(min-width: 1118px)"),
+    const mediaQuery = matchMedia("(max-width: 1118px)"),
       dropdownContainer = document.querySelectorAll(".dropdown__container");
 
     // Function to remove dropdown styles in mobile mode when browser resizes
@@ -92,10 +92,12 @@ const Navbar = () => {
           startDropdowns();
           setIsStartDropdown(true);
         }
-        // Remove the show-dropdown class from dropdown item
-        dropdownItems.forEach((e) => {
-          e.classList.remove("show-dropdown");
-        });
+        try {
+          // Remove the show-dropdown class from dropdown item
+          dropdownItems.forEach((e) => {
+            e.classList.remove("show-dropdown");
+          });
+        } catch {}
       }
     };
 
