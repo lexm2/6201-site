@@ -7,12 +7,12 @@ import { useProgress, Loader } from "@react-three/drei";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Swiper from "@/components/Swiper";
-import { NextUIProvider } from "@nextui-org/react";
 
 import AboutSection from "@/components/AboutSection";
 import HomeSection from "@/components/HomeSection";
 import SponsorSection from "@/components/SponsorSection";
-import DataTable from "@/components/Table";
+import DataTable from "@/components/Table"
+
 
 export default function Home() {
   const { active, progress } = useProgress();
@@ -43,7 +43,6 @@ export default function Home() {
   }, [active, afterLoad]);
 
   return (
-    <NextUIProvider>
       <main className="main" ref={container}>
         <Suspense fallback={<Loader />}>
           {/* <HomeCanvas /> */}
@@ -53,14 +52,14 @@ export default function Home() {
 
           <section className="datatable section">
             <DataTable />
+            {/* <ImageComponent /> */}
           </section>
-          <section className="section" id="swipe">
+          {/* <section className="section" id="swipe">
             <Swiper />
-          </section>
+          </section> */}
           <section className="favorite section" id="favorite"></section>
-          <SponsorSection />
+          {/* <SponsorSection /> */}
         </Suspense>
       </main>
-    </NextUIProvider>
   );
 }

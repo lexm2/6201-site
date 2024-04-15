@@ -6,6 +6,8 @@
 .section {
   display: block;
   padding-block: 5rem 1rem;
+  padding-left: 20rem;
+  padding-right: 20rem;
 }
 
 .loading {
@@ -128,6 +130,10 @@
   font-size: var(--big-font-size);
   color: var(--text-color);
 }
+/*=============== Datatable ===============*/
+
+
+
 /*=============== ABOUT ===============*/
 .about__container {
   row-gap: 3.5rem;
