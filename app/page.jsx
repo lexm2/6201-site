@@ -1,17 +1,18 @@
 "use client";
 
+import React, { useEffect, Suspense, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import "../styles/page.scss";
-import React, { useEffect, Suspense, useRef, lazy } from "react";
 import { useProgress, Loader } from "@react-three/drei";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Swiper from "@/components/Swiper";
+import { NextUIProvider } from "@nextui-org/react";
 
 import AboutSection from "@/components/AboutSection";
-import HomeCanvas from "@/components/HomeCanvas";
 import HomeSection from "@/components/HomeSection";
 import SponsorSection from "@/components/SponsorSection";
+import DataTable from "@/components/Table";
 
 export default function Home() {
   const { active, progress } = useProgress();
@@ -37,25 +38,29 @@ export default function Home() {
 
   useEffect(() => {
     if (active === true) {
-      setTimeout(() => {
-        afterLoad();
-      }, 3000);
+      afterLoad();
     }
   }, [active, afterLoad]);
 
   return (
-    <main className="main" ref={container}>
-      <Suspense fallback={<Loader />}>
-        <HomeCanvas />
-        <Navbar />
-        <HomeSection />
-        <section className="section" id="swipe">
-          <Swiper />
-        </section>
-        <AboutSection />
-        <section className="favorite section" id="favorite"></section>
-        <SponsorSection />
-      </Suspense>
-    </main>
+    <NextUIProvider>
+      <main className="main" ref={container}>
+        <Suspense fallback={<Loader />}>
+          {/* <HomeCanvas /> */}
+          <Navbar />
+          <HomeSection />
+          <AboutSection />
+
+          <section className="datatable section">
+            <DataTable />
+          </section>
+          <section className="section" id="swipe">
+            <Swiper />
+          </section>
+          <section className="favorite section" id="favorite"></section>
+          <SponsorSection />
+        </Suspense>
+      </main>
+    </NextUIProvider>
   );
 }

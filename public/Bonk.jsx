@@ -3,7 +3,7 @@ import { useGLTF, useProgress } from "@react-three/drei";
 import * as THREE from 'three'
 
 export function Bonk(props) {
-  const { nodes } = useGLTF("/bonk.glb");
+  const { nodes } = useGLTF("/bonkDecimated.glb");
 
   const wireframeMaterial = new THREE.MeshNormalMaterial({ wireframe: true });
 
@@ -22,4 +22,4 @@ export function Bonk(props) {
   );
 }
 
-useGLTF.preload("/bonk.glb");
+useGLTF.preload("/bonkDecimated.glb");

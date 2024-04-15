@@ -154,7 +154,7 @@ const Navbar = () => {
                       </i>
                     </div>
 
-                    <span className="dropdown__title">Lightning</span>
+                    <span className="dropdown__title">Tournaments</span>
 
                     <ul className="dropdown__list">
                       <li>
@@ -265,7 +265,7 @@ const Navbar = () => {
             {/*=============== DROPDOWN 2 ===============*/}
             <li className="dropdown__item">
               <div className="nav__link dropdown__button">
-                Resources Discover{" "}
+                Resources{" "}
                 <RiArrowDownSLine className="dropdown__arrow" />
               </div>
 
@@ -355,14 +355,14 @@ const Navbar = () => {
 
             <li>
               <a href="#" className="nav__link">
-                Sponsor
+                Sponsors
               </a>
             </li>
 
             {/*=============== DROPDOWN 3 ===============*/}
             <li className="dropdown__item">
               <div className="nav__link dropdown__button">
-                Team Discover <RiArrowDownSLine className="dropdown__arrow" />
+                Contact Us <RiArrowDownSLine className="dropdown__arrow" />
               </div>
 
               <div className="dropdown__container">
