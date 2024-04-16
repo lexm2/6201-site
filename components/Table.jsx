@@ -13,8 +13,12 @@ import {
 
 const columns = [
   {
+    key: "year",
+    label: "DATE",
+  },
+  {
     key: "name",
-    label: "CITY",
+    label: "TOURNAMENT LOCATION",
   },
   {
     key: "wins",
@@ -28,10 +32,7 @@ const columns = [
     key: "rank",
     label: "RANK",
   },
-  {
-    key: "year",
-    label: "YEAR",
-  },
+  
 ];
 
 const fetchDataFromAPI = async () => {
@@ -56,7 +57,7 @@ const fetchDataFromAPI = async () => {
               data[item.key] = {
                 eventData: anotherData,
                 city: item.city,
-                year: item.year,
+                year: item.start_date,
               };
             } else {
               console.error(

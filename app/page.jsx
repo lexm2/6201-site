@@ -18,12 +18,14 @@ export default function Home() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setLoading(true);
+    console.log("Loading done")
+    document.body.className = document.body.className.replace("loading","");
   }
   useEffect(() => {delayedLoading()}, []);
 
   return (
     <main className="main" ref={container}>
-      <Loading />
+      <Loading progress={50}/>
       <Suspense>
         {/* <HomeCanvas /> */}
         <Navbar />
