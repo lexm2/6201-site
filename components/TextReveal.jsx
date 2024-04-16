@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { motion, useAnimation, useInView } from "framer-motion";
 
-function TextReveal( {text, classes} ) {
+function TextReveal({ text, classes }) {
   const [lettersRef, setlettersRef] = useArrayRef();
   const triggerRef = useRef(null);
+  const controls = useAnimation();
 
   function useArrayRef() {
     const lettersRef = useRef([]);
@@ -12,34 +12,39 @@ function TextReveal( {text, classes} ) {
     return [lettersRef, (ref) => ref && lettersRef.current.push(ref)];
   }
 
-  gsap.registerPlugin(ScrollTrigger);
+  const isInView = useInView(triggerRef, {
+    once: true,
+    amount: 0.5,
+  });
 
   useEffect(() => {
-    const anim = gsap.to(lettersRef.current, {
-      scrollTrigger: {
-        trigger: triggerRef.current,
-        scrub: true,
-        start: "top bottom",
-        end: "bottom center",
-        //markers: true,
-      },
-      color: getComputedStyle(document.documentElement).getPropertyValue('--text-color'),
-      duration: 5,
-      stagger: 1,
-    });
-    return () => {
-      anim.kill();
-    };
-  }, []);
+    if (isInView) {
+      controls.start({
+        color: getComputedStyle(document.documentElement).getPropertyValue(
+          "--text-color"
+        ),
+        transition: {
+          duration: 5,
+          stagger: 1,
+        },
+      });
+    }
+  }, [isInView, controls]);
 
   return (
     <>
       <div className={`reveal ${classes}`}>
         <div ref={triggerRef}>
           {text.split("").map((letter, index) => (
-            <span className="reveal-text" key={index} ref={setlettersRef}>
+            <motion.span
+              className="reveal-text"
+              key={index}
+              ref={setlettersRef}
+              animate={controls}
+              initial={{ color: "transparent" }}
+            >
               {letter}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>

@@ -1,7 +1,4 @@
 import {
-  RiTwitterLine,
-  RiFacebookBoxLine,
-  RiInstagramLine,
   RiInformationLine,
 } from "react-icons/ri";
 
