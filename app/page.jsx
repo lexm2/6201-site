@@ -14,14 +14,14 @@ export default function Home() {
   const container = useRef();
   const [loading, setLoading] = useState(true);
   
-  async function delayedLoading() {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+  // async function delayedLoading() {
+  //   await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setLoading(true);
-    console.log("Loading done")
-    document.body.className = document.body.className.replace("loading","");
-  }
-  useEffect(() => {delayedLoading()}, []);
+  //   setLoading(true);
+  //   console.log("Loading done")
+  //   document.body.className = document.body.className.replace("loading","");
+  // }
+  // useEffect(() => {delayedLoading()}, []);
 
   return (
     <main className="main" ref={container}>
