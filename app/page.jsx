@@ -8,7 +8,7 @@ import AboutSection from "@/components/AboutSection";
 import HomeSection from "@/components/HomeSection";
 import SponsorSection from "@/components/SponsorSection";
 import DataTable from "@/components/Table";
-import Loading from "@/components/Loding"
+import Loading from "@/components/Loading"
 
 export default function Home() {
   const container = useRef();
