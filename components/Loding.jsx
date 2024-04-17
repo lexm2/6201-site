@@ -4,61 +4,96 @@ import { motion } from "framer-motion";
 const Loading = ({ progress }) => {
   const normalizedProgress = progress / 100;
 
-  const draw = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: () => {
-      return {
-        pathLength: 1,
-        opacity: 1,
-        transition: {
-          pathLength: { type: "spring", duration: 1.5, bounce: 0 },
-          opacity: { duration: 0.01 }
-        }
-      };
-    }
-  };
-
   return (
     <div className={styles.backround}>
-      <motion.svg
-        width="100vw"
-        height="100vh"
-        viewBox="0 0 100 100"
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.line
-          x1="48"
-          y1={60}
-          x2="48"
-          y2={60 - normalizedProgress * 20}
-          style={{ stroke: "#ed1c24", strokeWidth: 1 }}
-          animate={{ y2: 60 - normalizedProgress * 20 }}
-          variants={draw}
-          onAnimationComplete={() => {console.log('complete')}}
-          custom
-        />
-        <motion.line
-          x1="50"
-          y1={60}
-          x2="50"
-          y2={60 - normalizedProgress * 20}
-          style={{ stroke: "#ffffff", strokeWidth: 1 }}
-          animate={{ y2: 60 - normalizedProgress * 20 }}
-          variants={draw}
-          custom
-        />
-        <motion.line
-          x1="52"
-          y1={60}
-          x2="52"
-          y2={60 - normalizedProgress * 20}
-          style={{ stroke: "#0066b3", strokeWidth: 1 }}
-          animate={{ y2: 60 - normalizedProgress * 20 }}
-          variants={draw}
-          custom
-        />
-      </motion.svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <motion.g>
+          <motion.polygon
+            className={styles.square}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 2,
+              repeat: 1,
+              repeatType: "reverse",
+              repeatDelay: 0.5,
+            }}
+            points="52 50 57 45 62 50 57 55 "
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></motion.polygon>
+
+          {/* mask line */}
+          <motion.polygon
+            className={styles.triangle}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 2,
+              repeat: 1,
+              repeatType: "reverse",
+              repeatDelay: 0.5,
+            }}
+            points="48 50 40.5166852265 45 40.5166852265 55 "
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></motion.polygon>
+          <motion.circle
+            className={styles.circle}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 2,
+            }}
+            cx="50"
+            cy="50"
+            r="5"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></motion.circle>
+          <motion.line
+            className={styles.square}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 0.5,
+              repeat: 1,
+              repeatType: 'reverse',
+              repeatDelay: 3.25,
+              opacity: { delay: 0, duration: 0.01 }
+            }}
+            x1={52}
+            y1={50}
+            x2={57}
+            y2={45}
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></motion.line>
+          <motion.line
+            className={styles.triangle}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 0.5,
+              repeat: 1,
+              repeatType: "reverse",
+              repeatDelay: 3.25,
+            }}
+            x1={48}
+            y1={50}
+            x2={40.5166852265}
+            y2={45}
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></motion.line>
+          {/* mask line */}
+        </motion.g>
+      </svg>
     </div>
   );
 };
