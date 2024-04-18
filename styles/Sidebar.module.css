@@ -1,54 +1,85 @@
-.menuButton {
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  border-width: 2px;
-}
-
-.framerSidebarBackground {
-  position: fixed;
+.nav {
+  position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  z-index: 40;
-  backdrop-filter: blur(4px);
-  background: rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
-.framerSidebarPanel {
-  position: fixed;
+.background {
+  position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  z-index: 50;
-  border-right-width: 2px;
-  width: 100%;
-  max-width: 20rem;
-  height: 100vh;
+  bottom: 0;
+  width: 300px;
+  background: #fff;
 }
 
-.welcomeDiv {
+.menutoggle button {
+  outline: none;
+  border: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  left: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.navigation ul,
+.navigation li {
+  margin: 0;
+  padding: 0;
+}
+
+.navigation ul {
+  margin: 0;
+  padding: 0;
+  padding: 25px;
+  position: absolute;
+  top: 100px;
+  width: 230px;
+}
+
+.navigation li {
+  list-style: none;
+  margin-bottom: 20px;
   display: flex;
-  padding: 1.25rem;
-  justify-content: space-between;
   align-items: center;
-  border-bottom-width: 2px;
+  cursor: pointer;
 }
 
-.toggleSidebarButton {
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  border-width: 2px;
+.iconplaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex: 40px 0;
+  margin-right: 20px;
 }
 
-.sidebarBackButton {
+.textplaceholder {
+  border-radius: 5px;
+  width: 200px;
+  height: 20px;
+  flex: 1;
+}
+
+.refresh {
+  padding: 10px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  right: 10px;
   display: flex;
-  padding: 1.25rem;
-  gap: 1.25rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-bottom-width: 2px;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  cursor: pointer;
 }

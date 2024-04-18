@@ -2,7 +2,7 @@
 
 import React, { useEffect, Suspense, useRef, useState } from "react";
 import "../styles/page.scss";
-import Navigation from "@/components/Navigation";
+import Sidebar from "@/components/Sidebar";
 import Swiper from "@/components/Swiper";
 import AboutSection from "@/components/AboutSection";
 import HomeSection from "@/components/HomeSection";
@@ -19,7 +19,6 @@ export default function Home() {
     await new Promise((resolve) => setTimeout(resolve, 4000));
 
     setLoading(false);
-    
   }
   useEffect(() => {
     delayedLoading();
@@ -31,9 +30,14 @@ export default function Home() {
 
   return (
     <main className="main" ref={container}>
-      {!loadingAnimFinished && (<Loading loading={loading} setLoadingAnimFinished={setLoadingAnimFinished}/>)}
+      {!loadingAnimFinished && (
+        <Loading
+          loading={loading}
+          setLoadingAnimFinished={setLoadingAnimFinished}
+        />
+      )}
       <Suspense>
-        <Navigation />
+        <Sidebar />
         {/* <HomeCanvas /> */}
         <HomeSection />
         <AboutSection />

@@ -63,22 +63,6 @@
   letter-spacing: 1rem;
 }
 
-// .home__title span:nth-child(1) {
-//   transform: translateX(-120px);
-// }
-
-// .home__title span:nth-child(2) {
-//   transform: translateX(-60px);
-// }
-
-// .home__title span:nth-child(3) {
-//   transform: translateX(60px);
-// }
-
-// .home__title span:nth-child(4) {
-//   transform: translateX(120px);
-// }
-
 .home__social {
   display: grid;
   justify-items: center;
@@ -127,9 +111,6 @@
   font-size: var(--big-font-size);
   color: var(--text-color);
 }
-/*=============== Datatable ===============*/
-
-
 
 /*=============== ABOUT ===============*/
 .about__container {

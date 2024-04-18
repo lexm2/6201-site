@@ -40,4 +40,4 @@ const SocialLinks = () => (
   </div>
 );
 
-export default SocialLinks
+export default SocialLinks;

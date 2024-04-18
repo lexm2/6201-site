@@ -1,6 +1,4 @@
-import {
-  RiInformationLine,
-} from "react-icons/ri";
+import { RiInformationLine } from "react-icons/ri";
 
 import TextReveal from "@/components/TextReveal";
 

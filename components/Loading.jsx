@@ -4,7 +4,6 @@ import { root } from "postcss";
 import { useEffect, useState } from "react";
 
 const Loading = ({ loading, setLoadingAnimFinished }) => {
-
   const [showFirstAnimation, setShowFirstAnimation] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
 
@@ -14,7 +13,7 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     if (loading === false) {
       setShowSecondAnimation(true);
       setShowFirstAnimation(false);
-      delayUnmount()
+      delayUnmount();
     }
 
     async function delayUnmount() {
@@ -22,8 +21,6 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
       setLoadingAnimFinished(true);
     }
   }, [loading, setLoadingAnimFinished]);
-
- 
 
   const draw = {
     initial: { pathLength: 0, opacity: 0 },

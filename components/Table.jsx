@@ -32,7 +32,6 @@ const columns = [
     key: "rank",
     label: "RANK",
   },
-  
 ];
 
 const fetchDataFromAPI = async () => {
