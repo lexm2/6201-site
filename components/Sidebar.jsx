@@ -26,23 +26,50 @@ const sidebar = {
   },
 };
 
+const hide = {
+  open: () => ({
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 20,
+      restDelta: 2,
+    },
+  }),
+  closed: {
+    opacity: 0,
+    transition: {
+      delay: 0.5,
+      type: "spring",
+      stiffness: 400,
+      damping: 40,
+    },
+  },
+};
+
 export const Sidebar = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
 
   return (
-    <motion.nav
-      className={styles.nav}
-      initial={false}
-      animate={isOpen ? "open" : "closed"}
-      custom={height}
-      ref={containerRef}
-    >
-      <motion.div className={styles.background} variants={sidebar} />
-      <Navigation className={styles.navigation} />
-      <MenuToggle toggle={() => toggleOpen()} className={styles.menutoggle} />
-    </motion.nav>
+    <>
+      <motion.nav
+        className={styles.navigation}
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        custom={height}
+        ref={containerRef}
+      >
+        <motion.div
+          variants={hide}
+          aria-hidden="true"
+          className={styles.blur}
+        />
+        <motion.div className={styles.background} variants={sidebar} />
+        <Navigation className={styles.navigation} />
+        <MenuToggle toggle={() => toggleOpen()} />
+      </motion.nav>
+    </>
   );
 };
 
