@@ -1,0 +1,54 @@
+.menuButton {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border-width: 2px;
+}
+
+.framerSidebarBackground {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.framerSidebarPanel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  border-right-width: 2px;
+  width: 100%;
+  max-width: 20rem;
+  height: 100vh;
+}
+
+.welcomeDiv {
+  display: flex;
+  padding: 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-width: 2px;
+}
+
+.toggleSidebarButton {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border-width: 2px;
+}
+
+.sidebarBackButton {
+  display: flex;
+  padding: 1.25rem;
+  gap: 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-width: 2px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}

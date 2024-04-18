@@ -1,8 +1,9 @@
 import styles from "../styles/Loading.module.css";
 import { motion, AnimatePresence, animate } from "framer-motion";
+import { root } from "postcss";
 import { useEffect, useState } from "react";
 
-const Loading = ({ loading }) => {
+const Loading = ({ loading, setLoadingAnimFinished }) => {
 
   const [showFirstAnimation, setShowFirstAnimation] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
@@ -13,9 +14,16 @@ const Loading = ({ loading }) => {
     if (loading === false) {
       setShowSecondAnimation(true);
       setShowFirstAnimation(false);
+      delayUnmount()
     }
 
-  }, [loading]);
+    async function delayUnmount() {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      setLoadingAnimFinished(true);
+    }
+  }, [loading, setLoadingAnimFinished]);
+
+ 
 
   const draw = {
     initial: { pathLength: 0, opacity: 0 },
@@ -173,9 +181,6 @@ const Loading = ({ loading }) => {
           <>
             <motion.circle
               className={styles.circle}
-              transition={{
-                duration: 2,
-              }}
               cx="50"
               cy="50"
               r="5"
@@ -183,7 +188,6 @@ const Loading = ({ loading }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={scaleRadius}
-              custom={0}
             ></motion.circle>
           </>
         )}
