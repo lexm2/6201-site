@@ -9,11 +9,6 @@
   align-items: center;
   position: fixed;
   z-index: 999;
-  background: linear-gradient(
-    112.1deg,
-    rgb(14, 15, 20) 11.4%,
-    rgb(45, 53, 80) 70.2%
-  );
 }
 
 .hidden {
@@ -33,3 +28,4 @@
 .circle {
   stroke: #ffff;
 }
+

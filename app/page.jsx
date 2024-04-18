@@ -14,18 +14,18 @@ export default function Home() {
   const container = useRef();
   const [loading, setLoading] = useState(true);
   
-  // async function delayedLoading() {
-  //   await new Promise((resolve) => setTimeout(resolve, 2000));
+  async function delayedLoading() {
+    await new Promise((resolve) => setTimeout(resolve, 4000));
 
-  //   setLoading(true);
-  //   console.log("Loading done")
-  //   document.body.className = document.body.className.replace("loading","");
-  // }
-  // useEffect(() => {delayedLoading()}, []);
+    setLoading(false);
+    console.log("Loading done")
+    document.body.className = document.body.className.replace("loading","");
+  }
+  useEffect(() => {delayedLoading()}, []);
 
   return (
     <main className="main" ref={container}>
-      <Loading progress={50}/>
+      <Loading loading={loading}/>
       <Suspense>
         {/* <HomeCanvas /> */}
         <Navbar />
