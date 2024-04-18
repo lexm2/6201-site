@@ -4,6 +4,7 @@ import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "@/utils/useDimensions";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./Navigation";
+import { useClickAway } from "react-use";
 import styles from "../styles/Sidebar.module.css";
 
 const sidebar = {
@@ -31,17 +32,14 @@ const hide = {
     opacity: 1,
     transition: {
       type: "spring",
-      stiffness: 20,
-      restDelta: 2,
+      duration: 1,
     },
   }),
   closed: {
     opacity: 0,
     transition: {
-      delay: 0.5,
       type: "spring",
-      stiffness: 400,
-      damping: 40,
+      duration: 2,
     },
   },
 };
@@ -49,10 +47,21 @@ const hide = {
 export const Sidebar = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
+  useClickAway(containerRef, () => {
+    if (isOpen) {
+      toggleOpen();
+    }
+  });
   const { height } = useDimensions(containerRef);
 
   return (
     <>
+      <motion.div
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        className={styles.blur}
+        variants={hide}
+      />
       <motion.nav
         className={styles.navigation}
         initial={false}
@@ -60,11 +69,6 @@ export const Sidebar = () => {
         custom={height}
         ref={containerRef}
       >
-        <motion.div
-          variants={hide}
-          aria-hidden="true"
-          className={styles.blur}
-        />
         <motion.div className={styles.background} variants={sidebar} />
         <Navigation className={styles.navigation} />
         <MenuToggle toggle={() => toggleOpen()} />
