@@ -69,9 +69,10 @@ export const Sidebar = () => {
         custom={height}
         ref={containerRef}
       >
-        <motion.div className={styles.background} variants={sidebar} />
-        <Navigation className={styles.navigation} />
-        <MenuToggle toggle={() => toggleOpen()} />
+        <motion.div className={styles.background} variants={sidebar}>
+          <MenuToggle toggle={() => toggleOpen()} />
+          <Navigation className={styles.navigation} />
+        </motion.div>
       </motion.nav>
     </>
   );
