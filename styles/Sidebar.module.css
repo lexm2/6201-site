@@ -3,7 +3,7 @@
   bottom: 0;
   top: 0;
   left: 0;
-  width: 300px;
+  width: 400px;
   align-items: center;
   z-index: 50;
 }
@@ -15,11 +15,11 @@
   bottom: 0;
   width: 300px;
   margin: 1rem;
-  background: #fff;
+  /* background: #fff;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 15px; */
 }
 
 .blur {
@@ -33,8 +33,9 @@
   z-index: 49;
 }
 
+
 .menutoggle {
-  position: absolute;
+  display: flex;
   outline: none;
   border: none;
   user-select: none;
@@ -42,15 +43,15 @@
   -moz-user-select: none;
   -ms-user-select: none;
   cursor: pointer;
-  top: 1.1rem;
-  left: 1.74rem;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background: transparent;
+  align-items: center;
+  justify-content: center;
 }
 
-.navigation ul,
+/* .navigation ul,
 .navigation li {
   margin: 0;
   padding: 0;
@@ -61,7 +62,6 @@
   padding: 0;
   padding: 25px;
   position: absolute;
-  top: 100px;
   width: 230px;
 }
 
@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-}
+} */
 
 .iconplaceholder {
   width: 40px;
@@ -101,4 +101,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+
+.override_Y_Overflow {
+  overflow-y: unset !important;
 }

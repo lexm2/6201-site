@@ -5,11 +5,19 @@ import { useDimensions } from "@/utils/useDimensions";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./Navigation";
 import { useClickAway } from "react-use";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  CardFooter,
+  Link,
+} from "@nextui-org/react";
 import styles from "../styles/Sidebar.module.css";
 
 const sidebar = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    clipPath: `circle(${height * 2 + 200}px at 3.3rem 3.2rem)`,
     transition: {
       type: "spring",
       stiffness: 20,
@@ -17,7 +25,7 @@ const sidebar = {
     },
   }),
   closed: {
-    clipPath: "circle(30px at 40px 40px)",
+    clipPath: "circle(30px at 3.3rem 3.2rem)",
     transition: {
       delay: 0.5,
       type: "spring",
@@ -69,9 +77,31 @@ export const Sidebar = () => {
         custom={height}
         ref={containerRef}
       >
-        <motion.div className={styles.background} variants={sidebar}>
-          <MenuToggle toggle={() => toggleOpen()} />
-          <Navigation className={styles.navigation} />
+        <motion.div variants={sidebar}>
+          <Card className={styles.background}>
+            <CardHeader className="flex gap-4">
+              <MenuToggle toggle={() => toggleOpen()} />
+              <div className="flex flex-col">
+                <p className="text-md">6201</p>
+                <p className="text-small text-default-500">team6201.com</p>
+              </div>
+            </CardHeader>
+            <Divider />
+            <CardBody className={styles.override_Y_Overflow}>
+              <Navigation className={styles.navigation} />
+            </CardBody>
+            <Divider />
+            <CardFooter>
+              <Link
+                isExternal
+                showAnchorIcon
+                href="#"
+                className="ml-2"
+              >
+                Visit source code on GitHub.
+              </Link>
+            </CardFooter>
+          </Card>
         </motion.div>
       </motion.nav>
     </>

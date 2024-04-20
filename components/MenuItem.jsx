@@ -1,40 +1,35 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import styles from "../styles/Sidebar.module.css";
+import { Link } from "@nextui-org/react";
 
 const variants = {
   open: {
     y: 0,
-    x: 0,
     opacity: 1,
     transition: {
       y: { stiffness: 1000, velocity: -100 },
-      x: { stiffness: 1000, velocity: -100 },
     },
   },
   closed: {
     y: 50,
-    x: 50,
     opacity: 0,
     transition: {
       y: { stiffness: 1000 },
-      x: { stiffness: 1000 },
     },
   },
 };
 
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
-
-export const MenuItem = ({ i }) => {
-  const style = { border: `2px solid ${colors[i]}` };
+export const MenuItem = ({ item, i }) => {
   return (
     <motion.li
       variants={variants}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ x: -5 }}
+      whileTap={{ scale: 0.93 }}
     >
-      <div className={styles.iconplaceholder} style={style} />
-      <div className={styles.textplaceholder} style={style} />
+      <Link isBlock className="w-full ml-2" href={item.href} size="lg" color={item.color}>
+        {item.text}
+      </Link>
     </motion.li>
   );
 };

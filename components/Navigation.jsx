@@ -2,7 +2,17 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { MenuItem } from "./MenuItem";
 
-const itemIds = [0, 1, 2, 3, 4];
+const menuItems = [
+  { text: "Home", href: "#", color: "primary" }, //Color: Foreground Primary Secondary Success Warning Danger
+  { text: "Events", href: "#", color: "primary" },
+  { text: "Awards", href: "#", color: "primary" },
+  { text: "Robots", href: "#", color: "primary" },
+  { text: "Media", href: "#", color: "primary" },
+  { text: "Sponsors", href: "#", color: "primary" },
+  { text: "Donate", href: "#", color: "primary" },
+  { text: "Contact", href: "#", color: "primary" },
+  { text: "Settings", href: "#", color: "primary" },
+];
 
 const variants = {
   open: {
@@ -15,8 +25,8 @@ const variants = {
 
 export const Navigation = () => (
   <motion.ul variants={variants}>
-    {itemIds.map((i) => (
-      <MenuItem i={i} key={i} />
+    {menuItems.map((item, i) => (
+      <MenuItem item={item} key={i} />
     ))}
   </motion.ul>
 );
