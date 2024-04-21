@@ -16,10 +16,11 @@ export default function Home() {
   const [loadingAnimFinished, setLoadingAnimFinished] = useState(false);
 
   async function delayedLoading() {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setLoading(false);
   }
+  
   useEffect(() => {
     delayedLoading();
 
@@ -40,7 +41,7 @@ export default function Home() {
         <Sidebar />
         {/* <HomeCanvas /> */}
         <HomeSection />
-        <AboutSection />
+        {/* <AboutSection /> */}
 
         <section className="datatable section">
           <DataTable />

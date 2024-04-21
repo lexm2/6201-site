@@ -1,48 +1,25 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useInView, useAnimate } from "framer-motion";
 
-function TextReveal({ text, classes }) {
-  const [lettersRef, setlettersRef] = useArrayRef();
-  const triggerRef = useRef(null);
-  const controls = useAnimation();
-
-  function useArrayRef() {
-    const lettersRef = useRef([]);
-    lettersRef.current = [];
-    return [lettersRef, (ref) => ref && lettersRef.current.push(ref)];
-  }
-
-  const isInView = useInView(triggerRef, {
-    once: true,
-    amount: 0.5,
-  });
+const RevealText = ({ text, classes }) => {
+  const [scope, animate] = useAnimate();
+  const isInView = useInView(scope);
 
   useEffect(() => {
     if (isInView) {
-      controls.start({
-        color: getComputedStyle(document.documentElement).getPropertyValue(
-          "--text-color"
-        ),
-        transition: {
-          duration: 5,
-          stagger: 1,
-        },
+      const spanElements = scope.current.querySelectorAll(".reveal-text");
+      spanElements.forEach((span) => {
+        animate(span, { opacity: 1 }, { duration: 1 });
       });
     }
-  }, [isInView, controls]);
+  }, [animate, isInView, scope]);
 
   return (
     <>
       <div className={`reveal ${classes}`}>
-        <div ref={triggerRef}>
+        <div ref={scope}>
           {text.split("").map((letter, index) => (
-            <motion.span
-              className="reveal-text"
-              key={index}
-              ref={setlettersRef}
-              animate={controls}
-              initial={{ color: "transparent" }}
-            >
+            <motion.span className="reveal-text" key={index}>
               {letter}
             </motion.span>
           ))}
@@ -50,6 +27,6 @@ function TextReveal({ text, classes }) {
       </div>
     </>
   );
-}
+};
 
-export default TextReveal;
+export default RevealText;

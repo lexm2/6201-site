@@ -15,11 +15,6 @@
   bottom: 0;
   width: 300px;
   margin: 1rem;
-  /* background: #fff;
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px; */
 }
 
 .blur {
@@ -31,6 +26,7 @@
   backdrop-filter: blur(4px);
   background: rgba(0, 0, 0, 0.1);
   z-index: 49;
+  pointer-events: none;
 }
 
 
@@ -50,59 +46,6 @@
   align-items: center;
   justify-content: center;
 }
-
-/* .navigation ul,
-.navigation li {
-  margin: 0;
-  padding: 0;
-}
-
-.navigation ul {
-  margin: 0;
-  padding: 0;
-  padding: 25px;
-  position: absolute;
-  width: 230px;
-}
-
-.navigation li {
-  list-style: none;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-} */
-
-.iconplaceholder {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  flex: 40px 0;
-  margin-right: 20px;
-}
-
-.textplaceholder {
-  border-radius: 5px;
-  width: 200px;
-  height: 20px;
-  flex: 1;
-}
-
-.refresh {
-  padding: 10px;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  width: 20px;
-  height: 20px;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 
 .override_Y_Overflow {
   overflow-y: unset !important;

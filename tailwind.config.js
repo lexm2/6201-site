@@ -4,6 +4,7 @@ const {nextui} = require("@nextui-org/react");
 
 module.exports = {
   content: [
+    './styles/*.{css,scss}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

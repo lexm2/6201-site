@@ -13,12 +13,6 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     if (loading === false) {
       setShowSecondAnimation(true);
       setShowFirstAnimation(false);
-      delayUnmount();
-    }
-
-    async function delayUnmount() {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      setLoadingAnimFinished(true);
     }
   }, [loading, setLoadingAnimFinished]);
 
@@ -29,7 +23,7 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
         pathLength: 1,
         opacity: 1,
         transition: {
-          pathLength: { type: "spring", duration: 2, bounce: 0 },
+          pathLength: { type: "inertia", velocity: 50 },
           opacity: { duration: 0.01 },
         },
       };
@@ -79,13 +73,26 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     initial: { r: 5 },
     animate: () => {
       return {
-        r: 150,
+        r: 135,
         transition: {
-          r: { duration: 3, type: "spring", duration: 3, bounce: 0 },
+          r: { duration: 1, type: "spring", bounce: 0 },
         },
       };
     },
   };
+//stroke-width
+  const scaleUp = {
+    initial: { scale: 1 },
+    animate: () => {
+      return {
+        scale: 27,
+        transition: {
+          scale: { duration: 1, type: "spring", bounce: 0 },
+        },
+      };
+    },
+  };
+
 
   return (
     <motion.svg
@@ -184,7 +191,10 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              variants={scaleRadius}
+              variants={scaleUp}
+              onAnimationComplete={(definition) => {
+                setLoadingAnimFinished(true);
+              }}
             ></motion.circle>
           </>
         )}
