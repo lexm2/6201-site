@@ -1,11 +1,16 @@
 import styles from "../styles/Loading.module.css";
 import { motion, AnimatePresence, animate } from "framer-motion";
-import { root } from "postcss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Loading = ({ loading, setLoadingAnimFinished }) => {
+  const easeingArray = [0.075, 0.82, 0.165, 1];
+
   const [showFirstAnimation, setShowFirstAnimation] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
+
+  const square = useRef(null);
+  const triagle = useRef(null);
+  const circle = useRef(null);
 
   useEffect(() => {
     setShowFirstAnimation(true);
@@ -16,15 +21,28 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     }
   }, [loading, setLoadingAnimFinished]);
 
+  const opacityEaseOut = () => {
+    animate(square.current, { opacity: 0 }, { duration: 0.05 });
+    animate(triagle.current, { opacity: 0 }, { duration: 0.05 });
+  };
+
+  const opacityEaseIn = () => {
+    animate(square.current, { opacity: 1 }, { duration: 0.05 });
+    animate(triagle.current, { opacity: 1 }, { duration: 0.05 });
+    animate(circle.current, { opacity: 1 }, { duration: 0.05 });
+  };
+
   const draw = {
     initial: { pathLength: 0, opacity: 0 },
-    animate: () => {
+    animate: (i) => {
       return {
-        pathLength: 1,
-        opacity: 1,
+        pathLength: i,
         transition: {
-          pathLength: { type: "inertia", velocity: 50 },
-          opacity: { duration: 0.01 },
+          pathLength: {
+            delay: 1,
+            duration: 2,
+            ease: easeingArray,
+          },
         },
       };
     },
@@ -35,35 +53,15 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     animate: () => {
       return {
         pathLength: 1,
-        opacity: 1,
         transition: {
           pathLength: {
-            type: "spring",
+            delay: 1,
             duration: 2,
-            bounce: 0,
+            ease: easeingArray,
             repeat: 1,
-            repeatType: "reverse",
-          },
-          opacity: {
-            duration: 0.01,
+            repeatType: "mirror",
             repeat: 1,
-            repeatType: "reverse",
-            repeatDelay: 4,
           },
-        },
-      };
-    },
-  };
-
-  const drawHalf = {
-    initial: { pathLength: 0, opacity: 0 },
-    animate: () => {
-      return {
-        pathLength: 0.5,
-        opacity: 1,
-        transition: {
-          pathLength: { type: "spring", duration: 2, bounce: 0 },
-          opacity: { duration: 0.01 },
         },
       };
     },
@@ -80,7 +78,7 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
       };
     },
   };
-//stroke-width
+  //stroke-width
   const scaleUp = {
     initial: { scale: 1 },
     animate: () => {
@@ -92,7 +90,6 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
       };
     },
   };
-
 
   return (
     <motion.svg
@@ -142,6 +139,9 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
         {showFirstAnimation && (
           <>
             <motion.circle
+              onAnimationStart={opacityEaseIn}
+              ref={circle}
+              key="1"
               className={styles.circle}
               cx="50"
               cy="50"
@@ -150,16 +150,22 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={draw}
+              custom={1}
             ></motion.circle>
             <motion.polygon
+              ref={square}
+              key="2"
               className={styles.square}
               points="52 50 57 45 62 50 57 55 "
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={drawAndRemove}
+              onAnimationComplete={opacityEaseOut}
             ></motion.polygon>
             <motion.polygon
+              ref={triagle}
+              key="3"
               className={styles.triangle}
               points="48 50 40.5166852265 45 40.5166852265 55"
               fill="none"
@@ -168,6 +174,7 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               variants={drawAndRemove}
             ></motion.polygon>
             <motion.circle
+              key="4"
               className={styles.circle}
               cx="50"
               cy="50"
@@ -175,7 +182,8 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              variants={drawHalf}
+              variants={draw}
+              custom={0.5}
             ></motion.circle>
           </>
         )}

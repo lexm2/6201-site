@@ -18,7 +18,7 @@ const HomeSection = () => (
           What is this
         </p>
         <h4 className="text-white font-medium text-large">
-          [event description]
+          Not our team that&apos;s what
         </h4>
       </CardHeader>
       <Image fill={true} className="object-cover" src={Placeholder} alt="" />
