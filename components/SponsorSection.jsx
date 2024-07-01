@@ -1,13 +1,22 @@
-import Image from "next/image";
+import React from "react";
+import SponsorCard from "./SponsorCard";
+import styles from "../styles/SponsorSection.module.css";
 
-const SponsorSection = () => (
-  <section className="sponsor section">
-    <div className="sponsor__container container grid">
-      <Image src="images/sponsor-1.png" alt="image" className="sponsor__img" />
-      <Image src="images/sponsor-2.png" alt="image" className="sponsor__img" />
-      <Image src="images/sponsor-3.png" alt="image" className="sponsor__img" />
-      <Image src="images/sponsor-4.png" alt="image" className="sponsor__img" />
-    </div>
-  </section>
-);
+
+const SponsorSection = () => {
+  const sponsors = [
+    { imageSrc: "public/test.jpg", href: "https://google.com" },
+    { imageSrc: "public/test.jpg", href: "https://google.com" },
+    { imageSrc: "public/test.jpg", href: "https://google.com" },
+  ];
+
+  return (
+    <section className={styles.sponsor__container}>
+      {sponsors.map((sponsor, index) => (
+        <SponsorCard key={index} {...sponsor} />
+      ))}
+    </section>
+  );
+};
+
 export default SponsorSection;

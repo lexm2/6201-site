@@ -8,6 +8,7 @@ import AboutSection from "@/components/AboutSection";
 import HomeSection from "@/components/HomeSection";
 import DataTable from "@/components/Table";
 import Loading from "@/components/Loading";
+import SponsorSection from "@/components/SponsorSection";
 
 export default function Home() {
   const container = useRef();
@@ -40,8 +41,8 @@ export default function Home() {
         <Sidebar />
         {/* <HomeCanvas /> */}
         <HomeSection />
+        <SponsorSection />
         <AboutSection />
-
         <section className="datatable section">
           <DataTable />
           {/* <ImageComponent /> */}
@@ -50,7 +51,7 @@ export default function Home() {
             <Swiper />
           </section> */}
         <section className="favorite section" id="favorite"></section>
-        {/* <SponsorSection /> */}
+        
       </Suspense>
     </main>
   );

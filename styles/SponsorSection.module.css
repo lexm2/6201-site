@@ -1,0 +1,19 @@
+.sponsor__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  padding-block: 5rem 1rem;
+  padding-left: 20rem;
+  padding-right: 20rem;
+}
+
+.sponsorCard {
+  width: 100%;
+  max-width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.sponsorCard:hover {
+  transform: scale(1.05);
+}

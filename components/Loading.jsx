@@ -1,6 +1,5 @@
 import styles from "../styles/Loading.module.css";
 import { motion, AnimatePresence, animate } from "framer-motion";
-import { root } from "postcss";
 import { useEffect, useState } from "react";
 
 const Loading = ({ loading, setLoadingAnimFinished }) => {
