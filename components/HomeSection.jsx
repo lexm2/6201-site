@@ -3,15 +3,11 @@ import { Card, CardFooter, CardHeader, Button } from "@nextui-org/react";
 import Image from "next/image";
 import styles from "@/styles/HomeSection.module.css";
 
-const imageStyle = {
-  width: "100vw",
-};
-
 const HomeSection = () => (
   <section className={styles.home} id="home">
     <Card
       radius="lg"
-      className={`${styles.imageContainer} w-[90vw] h-[80vh]`}
+      className={styles.imageContainer}
     >
       <CardHeader className="absolute z-10 top-1 flex-col !items-start">
         <p className="text-tiny text-white/60 uppercase font-bold">

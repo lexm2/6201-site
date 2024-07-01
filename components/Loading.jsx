@@ -1,16 +1,11 @@
 import styles from "../styles/Loading.module.css";
 import { motion, AnimatePresence, animate } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { root } from "postcss";
+import { useEffect, useState } from "react";
 
 const Loading = ({ loading, setLoadingAnimFinished }) => {
-  const easeingArray = [0.075, 0.82, 0.165, 1];
-
   const [showFirstAnimation, setShowFirstAnimation] = useState(false);
   const [showSecondAnimation, setShowSecondAnimation] = useState(false);
-
-  const square = useRef(null);
-  const triagle = useRef(null);
-  const circle = useRef(null);
 
   useEffect(() => {
     setShowFirstAnimation(true);
@@ -21,28 +16,15 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     }
   }, [loading, setLoadingAnimFinished]);
 
-  const opacityEaseOut = () => {
-    animate(square.current, { opacity: 0 }, { duration: 0.05 });
-    animate(triagle.current, { opacity: 0 }, { duration: 0.05 });
-  };
-
-  const opacityEaseIn = () => {
-    animate(square.current, { opacity: 1 }, { duration: 0.05 });
-    animate(triagle.current, { opacity: 1 }, { duration: 0.05 });
-    animate(circle.current, { opacity: 1 }, { duration: 0.05 });
-  };
-
   const draw = {
     initial: { pathLength: 0, opacity: 0 },
-    animate: (i) => {
+    animate: () => {
       return {
-        pathLength: i,
+        pathLength: 1,
+        opacity: 1,
         transition: {
-          pathLength: {
-            delay: 1,
-            duration: 2,
-            ease: easeingArray,
-          },
+          pathLength: { type: "spring", duration: 2, bounce: 0 },
+          opacity: { duration: 0.01 },
         },
       };
     },
@@ -53,15 +35,35 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     animate: () => {
       return {
         pathLength: 1,
+        opacity: 1,
         transition: {
           pathLength: {
-            delay: 1,
+            type: "spring",
             duration: 2,
-            ease: easeingArray,
+            bounce: 0,
             repeat: 1,
-            repeatType: "mirror",
-            repeat: 1,
+            repeatType: "reverse",
           },
+          opacity: {
+            duration: 0.01,
+            repeat: 1,
+            repeatType: "reverse",
+            repeatDelay: 4,
+          },
+        },
+      };
+    },
+  };
+
+  const drawHalf = {
+    initial: { pathLength: 0, opacity: 0 },
+    animate: () => {
+      return {
+        pathLength: 0.5,
+        opacity: 1,
+        transition: {
+          pathLength: { type: "spring", duration: 2, bounce: 0 },
+          opacity: { duration: 0.01 },
         },
       };
     },
@@ -78,7 +80,7 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
       };
     },
   };
-  //stroke-width
+
   const scaleUp = {
     initial: { scale: 1 },
     animate: () => {
@@ -102,18 +104,34 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
     >
       <AnimatePresence>
         {showSecondAnimation && (
-          <defs>
-            <mask id="myMask" x="0" y="0" width="100" height="100">
-              <rect x="-100" y="0" width="400" height="100" fill="white" />
-              <motion.circle
-                cx="50"
-                cy="50"
-                r="5"
-                fill="black"
-                variants={scaleRadius}
-              />
-            </mask>
-          </defs>
+          <>
+            <motion.circle
+              className={styles.circle}
+              cx="50"
+              cy="50"
+              r="5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              variants={scaleUp}
+              onAnimationComplete={(definition) => {
+                setLoadingAnimFinished(true);
+              }}
+            ></motion.circle>
+
+            <defs>
+              <mask id="myMask" x="0" y="0" width="100" height="100">
+                <rect x="-100" y="0" width="400" height="100" fill="white" />
+                <motion.circle
+                  cx="50"
+                  cy="50"
+                  r="5"
+                  fill="black"
+                  variants={scaleRadius}
+                />
+              </mask>
+            </defs>
+          </>
         )}
       </AnimatePresence>
 
@@ -139,9 +157,6 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
         {showFirstAnimation && (
           <>
             <motion.circle
-              onAnimationStart={opacityEaseIn}
-              ref={circle}
-              key="1"
               className={styles.circle}
               cx="50"
               cy="50"
@@ -150,22 +165,16 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={draw}
-              custom={1}
             ></motion.circle>
             <motion.polygon
-              ref={square}
-              key="2"
               className={styles.square}
               points="52 50 57 45 62 50 57 55 "
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               variants={drawAndRemove}
-              onAnimationComplete={opacityEaseOut}
             ></motion.polygon>
             <motion.polygon
-              ref={triagle}
-              key="3"
               className={styles.triangle}
               points="48 50 40.5166852265 45 40.5166852265 55"
               fill="none"
@@ -174,7 +183,6 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               variants={drawAndRemove}
             ></motion.polygon>
             <motion.circle
-              key="4"
               className={styles.circle}
               cx="50"
               cy="50"
@@ -182,27 +190,7 @@ const Loading = ({ loading, setLoadingAnimFinished }) => {
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              variants={draw}
-              custom={0.5}
-            ></motion.circle>
-          </>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {showSecondAnimation && (
-          <>
-            <motion.circle
-              className={styles.circle}
-              cx="50"
-              cy="50"
-              r="5"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              variants={scaleUp}
-              onAnimationComplete={(definition) => {
-                setLoadingAnimFinished(true);
-              }}
+              variants={drawHalf}
             ></motion.circle>
           </>
         )}

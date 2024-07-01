@@ -31,6 +31,7 @@
 
 
 .menutoggle {
+  pointer-events: auto;
   display: flex;
   outline: none;
   border: none;

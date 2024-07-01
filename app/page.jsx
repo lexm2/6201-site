@@ -6,7 +6,6 @@ import Sidebar from "@/components/Sidebar";
 import Swiper from "@/components/Swiper";
 import AboutSection from "@/components/AboutSection";
 import HomeSection from "@/components/HomeSection";
-import Blob from '@/components/Blob';
 import DataTable from "@/components/Table";
 import Loading from "@/components/Loading";
 
@@ -16,7 +15,7 @@ export default function Home() {
   const [loadingAnimFinished, setLoadingAnimFinished] = useState(false);
 
   async function delayedLoading() {
-    await new Promise((resolve) => setTimeout(resolve, 6050));
+    await new Promise((resolve) => setTimeout(resolve, 4050));
 
     setLoading(false);
   }
@@ -38,11 +37,10 @@ export default function Home() {
         />
       )}
       <Suspense>
-        <Blob />
         <Sidebar />
         {/* <HomeCanvas /> */}
         <HomeSection />
-        {/* <AboutSection /> */}
+        <AboutSection />
 
         <section className="datatable section">
           <DataTable />

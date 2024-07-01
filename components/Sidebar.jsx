@@ -60,7 +60,13 @@ export const Sidebar = () => {
       toggleOpen();
     }
   });
+
   const { height } = useDimensions(containerRef);
+
+  const handleToggle = () => {
+    toggleOpen();
+    containerRef.current.style.pointerEvents = isOpen ? "none" : "auto";
+  };
 
   return (
     <>
@@ -80,7 +86,7 @@ export const Sidebar = () => {
         <motion.div variants={sidebar}>
           <Card className={styles.background}>
             <CardHeader className="flex gap-4">
-              <MenuToggle toggle={() => toggleOpen()} />
+              <MenuToggle toggle={handleToggle} />
               <div className="flex flex-col">
                 <p className="text-md">6201</p>
                 <p className="text-small text-default-500">team6201.com</p>
@@ -92,12 +98,7 @@ export const Sidebar = () => {
             </CardBody>
             <Divider />
             <CardFooter>
-              <Link
-                isExternal
-                showAnchorIcon
-                href="#"
-                className="ml-2"
-              >
+              <Link isExternal showAnchorIcon href="#" className="ml-2">
                 Visit source code on GitHub.
               </Link>
             </CardFooter>
