@@ -13,7 +13,7 @@ import {
   CardFooter,
   Link,
 } from "@nextui-org/react";
-import styles from "../styles/Sidebar.module.css";
+import styles from "@/styles/Sidebar.module.css";
 
 const sidebar = {
   open: (height = 1000) => ({

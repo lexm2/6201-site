@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion } from "framer-motion";
-import styles from "../styles/Sidebar.module.css";
+import styles from "@/styles/Sidebar.module.css";
 
 const Path = (props) => (
   <motion.path

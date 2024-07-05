@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, Suspense, useRef, useState } from "react";
-import "../styles/page.scss";
+import "@/styles/page.scss";
 import Sidebar from "@/components/Sidebar";
 import Swiper from "@/components/Swiper";
 import AboutSection from "@/components/AboutSection";
@@ -15,13 +15,19 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [loadingAnimFinished, setLoadingAnimFinished] = useState(false);
 
+  
+
   async function delayedLoading() {
     await new Promise((resolve) => setTimeout(resolve, 4050));
 
     setLoading(false);
   }
-  
+
   useEffect(() => {
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
+
     delayedLoading();
 
     if (loadingAnimFinished) {
@@ -51,7 +57,6 @@ export default function Home() {
             <Swiper />
           </section> */}
         <section className="favorite section" id="favorite"></section>
-        
       </Suspense>
     </main>
   );

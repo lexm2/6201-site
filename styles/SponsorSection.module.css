@@ -6,11 +6,11 @@
   padding-block: 5rem 1rem;
   padding-left: 20rem;
   padding-right: 20rem;
+  height: 30rem;
 }
 
 .sponsorCard {
   width: 100%;
-  max-width: 300px;
   transition: transform 0.3s ease;
 }
 

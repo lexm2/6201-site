@@ -1,6 +1,6 @@
 import React from "react";
 import SponsorCard from "./SponsorCard";
-import styles from "../styles/SponsorSection.module.css";
+import styles from "@/styles/SponsorSection.module.css";
 
 
 const SponsorSection = () => {
